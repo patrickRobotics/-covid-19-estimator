@@ -1,0 +1,56 @@
+extends layout
+
+block layout-content
+  form(class="form-signin" action="/", method="post", title="The Covid-19 Estimator")
+      #error
+        if error
+            ul
+                p(class="error")=error.msg
+
+      fieldset
+        legend Regional Information
+        div.form-group.row
+          label(class="col-sm-4 col-form-label", for="name") Region
+          div.col-sm-6
+            input.form-control#name(type="text", name="name", placeholder="e.g. Africa", required, autocomplete="off")
+        div.form-group.row
+          label(class="col-sm-4 col-form-label", for="avgAge") Average Age
+          div.col-sm-6
+            input.form-control#avgAge(type="text", name="avgAge", placeholder="e.g. 19.7", required,autocomplete="off")
+        div.form-group.row
+          label(class="col-sm-4 col-form-label", for="avgDailyIncomeInUSD") Average Daily Income (USD)
+          div.col-sm-6
+            input.form-control#avgDailyIncomeInUSD(type="text", name="avgDailyIncomeInUSD", placeholder="e.g. 3",required,autocomplete="off")
+        div.form-group.row
+          label(class="col-sm-4 col-form-label", for="avgDailyIncomePopulation") Average Income Population
+          div.col-sm-6
+            input.form-control#avgDailyIncomePopulation(type="text", name="avgDailyIncomePopulation", placeholder="e.g. 0.62",required,autocomplete="off")
+        div.form-group.row
+          label(class="col-sm-4 col-form-label", for="population") Population
+          div.col-sm-6
+            input.form-control#population(type="number",name="population",required,autocomplete="off",data-population)
+
+      fieldset
+        legend Estimation Period
+        div.form-group.row
+            label(class="col-sm-4 col-form-label", for="periodType") Period Type
+            div.col-sm-6
+                select.form-control#periodType(name="periodType", data-period-type)
+                    option(value="days", selected) Days
+                    option(value="weeks") Weeks
+                    option(value="months") Months
+        div.form-group.row
+            label(class="col-sm-4 col-form-label", for="timeToElapse") Period
+            div.col-sm-6
+                input.form-control#timeToElapse(type="number", name="timeToElapse", placeholder="e.g. 30",required,autocomplete="off",data-time-to-elapse)
+      fieldset
+          legend Infection Data
+          div.form-group.row
+              label(class="col-sm-4 col-form-label", for="reportedCases") Reported cases
+              div.col-sm-6
+                input.form-control#reportedCases(type="number", name="reportedCases", placeholder="e.g. 1968", required,autocomplete="off",data-reported-cases)
+          div.form-group.row
+              label(class="col-sm-4 col-form-label", for="totalHospitalBeds") Hospital beds
+              div.col-sm-6
+                input.form-control#totalHospitalBeds(type="number", name="totalHospitalBeds", placeholder="e.g. 133318", required,autocomplete="off",data-total-hospital-beds)
+      button.btn.btn-primary.mb-2r(type="submit", data-go-estimate) Get Estimations

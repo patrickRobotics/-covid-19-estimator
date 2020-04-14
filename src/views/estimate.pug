@@ -1,0 +1,86 @@
+extends layout
+
+block layout-content
+    .row.no-gutters
+        - let {data, impact, severeImpact} = estimate;
+        - let {region:{name, avgAge, avgDailyIncomeInUSD, avgDailyIncomePopulation},periodType, timeToElapse, reportedCases, population, totalHospitalBeds} = data;
+            .col-sm
+                table.table.table-hover(title="The user input data")
+                    thead.thead-dark: tr: th(colspan="2") User input data
+                    tbody
+                        tr
+                            td Region Name :
+                            td= name
+                        tr
+                            td Average Age :
+                            td= avgAge
+                        tr
+                            td Average Daily Income (USD) :
+                            td= avgDailyIncomeInUSD
+                        tr
+                            td Average Daily Income Population :
+                            td=avgDailyIncomePopulation
+                        tr
+                            td Period Type :
+                            td=periodType
+                        tr
+                            td Time to lapse :
+                            td=timeToElapse
+                        tr
+                            td Population :
+                            td=population
+                        tr
+                            td Total Hospital Beds :
+                            td=totalHospitalBeds
+            .col-sm
+                - let {dollarsInFlight, casesForVentilatorsByRequestedTime,casesForICUByRequestedTime,hospitalBedsByRequestedTime,severeCasesByRequestedTime,infectionsByRequestedTime,currentlyInfected} = impact;
+                    table.table.table-hover(title="Low Impact Estimation")
+                        thead.thead-dark: tr: th(colspan="2") Low Impact Estimation
+                        tbody
+                            tr
+                                td Currently Infected :
+                                td=currentlyInfected
+                            tr
+                                td Infections By Requested Time :
+                                td=infectionsByRequestedTime
+                            tr
+                                td Severe Cases By Requested Time :
+                                td=severeCasesByRequestedTime
+                            tr
+                                td Hospital Beds By Requested Time :
+                                td=hospitalBedsByRequestedTime
+                            tr
+                                td Cases for ICU :
+                                td=casesForICUByRequestedTime
+                            tr
+                                td Cases for Ventilators :
+                                td=casesForVentilatorsByRequestedTime
+                            tr
+                                td Dollars in flight :
+                                td=dollarsInFlight
+            .col-sm
+                - let {dollarsInFlight:dollars, casesForVentilatorsByRequestedTime:vents,casesForICUByRequestedTime:ICU,hospitalBedsByRequestedTime:beds,severeCasesByRequestedTime:severe,infectionsByRequestedTime:infections,currentlyInfected:current} = severeImpact;
+                    table.table.table-hover(title="Severe Impact Estimation")
+                        thead.thead-dark: tr: th(colspan="2") Severe Impact Estimation
+                        tbody
+                            tr
+                                td Currently Infected :
+                                td=current
+                            tr
+                                td Infections By Requested Time :
+                                td=infections
+                            tr
+                                td Severe Cases By Requested Time :
+                                td=severe
+                            tr
+                                td Hospital Beds By Requested Time :
+                                td=beds
+                            tr
+                                td Cases for ICU :
+                                td=ICU
+                            tr
+                                td Cases for Ventilators :
+                                td=vents
+                            tr
+                                td Dollars in flight :
+                                td=dollars
