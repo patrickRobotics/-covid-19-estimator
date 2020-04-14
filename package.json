@@ -5,6 +5,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "test": "jest --passWithNoTests",
     "lint": "eslint ./src/"
   },
   "dependencies": {
