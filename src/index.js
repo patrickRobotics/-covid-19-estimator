@@ -51,6 +51,4 @@ app.use((err, req, res, next) => {
 /**
  * Server Activation
  */
-app.listen(port, () => {
-  console.log(`Listening to requests on http://localhost:${port}`);
-});
+app.listen(port, () => {});
