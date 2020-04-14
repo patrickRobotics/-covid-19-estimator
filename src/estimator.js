@@ -1,18 +1,18 @@
 const normalizeDays = (periodType, timeToElapse) => {
-  let days;
-  if (periodType === 'days') {
-    days = timeToElapse;
-  } else if (periodType === 'weeks') {
-    days = timeToElapse * 7;
-  } else {
-    days = timeToElapse * 30;
+  switch (periodType) {
+    case 'months':
+      return timeToElapse * 30;
+    case 'weeks':
+      return timeToElapse * 7;
+    default:
+      break;
   }
-  return days;
+  return timeToElapse;
 };
 
 const computeFactor = (periodType, timeToElapse) => {
   const days = normalizeDays(periodType, timeToElapse);
-  return Math.floor(days / 10);
+  return Math.floor(days / 3);
 };
 
 const computeImpact = (data) => {
