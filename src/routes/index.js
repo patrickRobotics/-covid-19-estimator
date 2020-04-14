@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   res.render('index', { title: 'Covid-19 Estimator' });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', (req, res) => {
   const { name } = req.body;
   const { avgAge } = req.body;
   const { avgDailyIncomeInUSD } = req.body;
