@@ -4,9 +4,6 @@
   "repository": "git@github.com:BuildforSDG-Cohort1-Assessment/covid-19-estimator-js.git",
   "license": "MIT",
   "private": false,
-  "engines": {
-    "node": "10.x"
-  },
   "scripts": {
     "start": "nodemon ./src/index.js",
     "test": "jest --passWithNoTests",
