@@ -19,10 +19,16 @@ const computeImpact = (data) => {
   const currentlyInfected = data.reportedCases * 10;
   const factor = computeFactor(data.periodType, data.timeToElapse);
   const infectionsByRequestedTime = currentlyInfected * (2 ** factor);
+  const severeCasesByRequestedTime = Math.floor(infectionsByRequestedTime * 0.15);
+  const hospitalBedsByRequestedTime = Math.trunc(
+    data.totalHospitalBeds * 0.35 - severeCasesByRequestedTime
+  );
 
   const impact = {
     currentlyInfected,
-    infectionsByRequestedTime
+    infectionsByRequestedTime,
+    severeCasesByRequestedTime,
+    hospitalBedsByRequestedTime
   };
 
   return impact;
@@ -32,10 +38,16 @@ const computeSevereImpact = (data) => {
   const currentlyInfected = data.reportedCases * 50;
   const factor = computeFactor(data.periodType, data.timeToElapse);
   const infectionsByRequestedTime = currentlyInfected * (2 ** factor);
+  const severeCasesByRequestedTime = Math.floor(infectionsByRequestedTime * 0.15);
+  const hospitalBedsByRequestedTime = Math.trunc(
+    data.totalHospitalBeds * 0.35 - severeCasesByRequestedTime
+  );
 
   const severeImpact = {
     currentlyInfected,
-    infectionsByRequestedTime
+    infectionsByRequestedTime,
+    severeCasesByRequestedTime,
+    hospitalBedsByRequestedTime
   };
 
   return severeImpact;
@@ -48,11 +60,15 @@ const covid19ImpactEstimator = (data) => {
     data,
     impact: {
       currentlyInfected: impactData.currentlyInfected,
-      infectionsByRequestedTime: impactData.infectionsByRequestedTime
+      infectionsByRequestedTime: impactData.infectionsByRequestedTime,
+      severeCasesByRequestedTime: impactData.severeCasesByRequestedTime,
+      hospitalBedsByRequestedTime: impactData.hospitalBedsByRequestedTime
     },
     severeImpact: {
       currentlyInfected: severeImpactData.currentlyInfected,
-      infectionsByRequestedTime: severeImpactData.infectionsByRequestedTime
+      infectionsByRequestedTime: severeImpactData.infectionsByRequestedTime,
+      severeCasesByRequestedTime: severeImpactData.severeCasesByRequestedTime,
+      hospitalBedsByRequestedTime: severeImpactData.hospitalBedsByRequestedTime
     }
   };
 };
